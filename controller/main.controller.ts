@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import config from "../config/app.config";
+import messageService from "../services/message.service";
 // ==================================================
 // Main Controller Functions
 // ==================================================
@@ -34,6 +35,32 @@ const webHookVerify = async (req: Request, res: Response, next: NextFunction): P
       // Pass error to error handling middleware
       next(error);
     }
-  }
+}
 
-  export {webHookVerify}
+
+/**
+ * Authentication hook middleware
+ * Verifies user credentials and handles login flow with MFA support
+ * @param req - Express request object containing email and password
+ * @param res - Express response object
+ * @param next - Express next function for error handling
+ */
+const getMessageHook = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const {body} = req;
+        const response = await messageService.messageReceived(body);
+
+        res.status(200).send({
+            success:true,
+            message:"Message received"
+        });
+        return;
+
+    }
+    catch(error){
+      // Pass error to error handling middleware
+      next(error);
+    }
+}
+
+  export {webHookVerify, getMessageHook}

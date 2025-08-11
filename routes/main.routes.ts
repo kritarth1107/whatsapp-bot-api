@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { webHookVerify } from "../controller/main.controller";
+import { webHookVerify, getMessageHook } from "../controller/main.controller";
 
 
 /**
@@ -19,11 +19,19 @@ const router: Router = express.Router();
 // ==================================================
 
 /**
- * @route   GET /api/auth/hook
- * @desc    Authentication hook for user verification
+ * @route   GET /api/main/hook
+ * @desc    Authentication hook for webhook
  * @access  Public
  */
 router.get("/hook", webHookVerify);
+
+
+/**
+ * @route   POST /api/main/hook
+ * @desc    Receive message from whatsapp
+ * @access  Public
+ */
+router.post("/hook", getMessageHook);
 
 
 // ==================================================
