@@ -70,8 +70,8 @@ import { ServerMetrics, HealthCheckResponse, RouteInfo } from './types/server.ty
 // Route Imports
 // ==================================================
 
-// Authentication routes (login, MFA, password management)
-// import { authRouter } from './routes/auth.routes';
+// Main routes (facebook/whatsapp webhooks)
+import { mainRouter } from './routes/main.routes';
 
 // ==================================================
 // Server Setup Class
@@ -259,6 +259,7 @@ export class ServerSetup {
     // ===== API VERSION PREFIX =====
     // Use versioned API endpoints for better API management
     const apiPrefix = `api/${config.server.apiVersion}`;
+    const webhookPrefix = `webhook/${config.server.apiVersion}`;
 
     // ===== PUBLIC ROUTES =====
     // Routes that don't require authentication
@@ -268,6 +269,10 @@ export class ServerSetup {
     
     // Route listing endpoint for documentation
     this.app.get('/list', this.listRoutes.bind(this));
+
+    // ===== MAIN ROUTES =====
+    // Main routes (facebook/whatsapp webhooks)
+    this.app.use(`/${webhookPrefix}/main`, mainRouter);
 
 
     // ===== 404 HANDLER =====

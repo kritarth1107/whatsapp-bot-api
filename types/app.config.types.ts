@@ -67,6 +67,7 @@ export interface WhatsappConfig {
     accessToken: string;                   // Whatsapp access token
     phoneNumberId: string;                // Whatsapp phone number ID
     businessAccountId: string;            // Whatsapp business account ID
+    verifyToken:string;                   // Whatsapp verify token
 }
 
 /**

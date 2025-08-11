@@ -89,6 +89,7 @@ const config: AppConfig = {
         accessToken: process.env.ACCESS_TOKEN || "N/A",                     // Whatsapp access token
         phoneNumberId: process.env.PHONE_NUMBER_ID || "N/A",                // Whatsapp phone number ID
         businessAccountId: process.env.BUSINESS_ACCOUNT_ID || "N/A",        // Whatsapp business account ID
+        verifyToken: process.env.WHATSAPP_VERIFY_TOKEN || "N/A",                     // Whatsapp verify token
     },
 };
 
